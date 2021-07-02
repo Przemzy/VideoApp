@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {CoreModule} from "./core/core.module";
-import {DashboardModule} from "./dashboard/dashboard.module";
+import { CoreModule} from "./core/core.module";
+import { DashboardModule} from "./dashboard/dashboard.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -16,9 +16,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     CoreModule,
     DashboardModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }
