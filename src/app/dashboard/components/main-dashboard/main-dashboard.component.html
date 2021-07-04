@@ -1,0 +1,91 @@
+
+
+<div class="buttons">
+
+  <button mat-stroked-button color="primary"
+          (click)="displayOptions = display.list"
+          [disabled]="displayOptions == display.list" >
+    <mat-icon class="material-icons">view_list</mat-icon>
+  </button>
+
+  <button mat-stroked-button color="primary"
+          (click)="displayOptions = display.blocks"
+          [disabled]="displayOptions == display.blocks">
+    <mat-icon class="material-icons-outlined">calendar_view_month</mat-icon>
+  </button>
+
+</div>
+<!--<section class="wrapper">-->
+<!--  <div *ngFor="let item of videoList" >-->
+<!--    <div>-->
+<!--      <mat-card>-->
+
+<!--        <mat-card-header>-->
+<!--          <mat-card-title>{{item.snippet.title}}</mat-card-title>-->
+<!--        </mat-card-header>-->
+
+<!--        <mat-card-content>-->
+<!--&lt;!&ndash;          <div class="img-wrapper">&ndash;&gt;-->
+<!--&lt;!&ndash;            <img src='{{item.snippet.thumbnails.medium.url}}'>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--          <app-display-video videoId="{{item.id.videoId}}"></app-display-video>-->
+<!--          <p>{{item.snippet.description}}</p>-->
+<!--        </mat-card-content>-->
+
+<!--      </mat-card>-->
+
+<!--    </div>-->
+<!--  </div>-->
+
+<!--</section>-->
+<section class="center" [ngSwitch]="displayOptions" >
+
+
+
+    <div class="wrapper" *ngSwitchCase="display.blocks">
+        <div *ngFor="let item of videoList">
+          <mat-card (click)="openModal(item)">
+
+            <mat-card-header>
+              <mat-card-title>Lorem ipsum dolor sit amet.</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+              <!--          <div class="img-wrapper">-->
+              <!--            <img src='{{item.snippet.thumbnails.medium.url}}'>-->
+              <!--          </div>-->
+              <app-display-video videoId="{{item.id.videoId}}" size="{{videoSize.small}}" ></app-display-video>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, maiores.</p>
+            </mat-card-content>
+
+          </mat-card>
+
+        </div>
+      </div>
+
+
+      <div class="wrapper-list" *ngSwitchCase="display.list">
+        <div *ngFor="let item of videoList" >
+          <mat-card>
+
+            <mat-card-header>
+              <mat-card-title>Lorem ipsum dolor sit amet.</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+              <!--          <div class="img-wrapper">-->
+              <!--            <img src='{{item.snippet.thumbnails.medium.url}}'>-->
+              <!--          </div>-->
+              <app-display-video videoId="{{item.id.videoId}}" size="{{videoSize.medium}}" ></app-display-video>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, maiores.</p>
+            </mat-card-content>
+
+          </mat-card>
+
+        </div>
+      </div>
+
+
+
+</section>
+

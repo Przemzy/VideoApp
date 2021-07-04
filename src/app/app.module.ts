@@ -6,10 +6,14 @@ import { CoreModule} from "./core/core.module";
 import { DashboardModule} from "./dashboard/dashboard.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule} from "@angular/common/http";
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {ModalComponent} from "./shared/components/modal/modal.component";
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -18,6 +22,8 @@ import { HttpClientModule} from "@angular/common/http";
     DashboardModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatProgressSpinnerModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

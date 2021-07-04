@@ -1,0 +1,36 @@
+<div *ngIf="size">
+  <div class="player-wrapper" [ngSwitch]="size">
+    <div *ngSwitchDefault>
+         <youtube-player videoId="{{videoId}}" [width]="400" [height]="225" ></youtube-player>
+<!--      <iframe [src]="video"-->
+<!--              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"-->
+<!--              allowfullscreen-->
+<!--              frameborder="none"-->
+<!--              width="400"-->
+<!--              height="225">-->
+<!--      </iframe>-->
+    </div>
+
+
+    <div *ngSwitchCase="videoSizes.medium">
+         <youtube-player videoId="{{videoId}}" [width]="560" [height]="340" ></youtube-player>
+<!--      <iframe [src]="video"-->
+<!--              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"-->
+<!--              allowfullscreen-->
+<!--              frameborder="none"-->
+<!--              width="560"-->
+<!--              height="340"-->
+<!--      >-->
+<!--      </iframe>-->
+    </div>
+    <!--  </div>-->
+
+    <!--  <div *ngIf="!apiLoaded" class="spinner">-->
+    <!--    <mat-spinner strokeWidth="5" diameter="50"></mat-spinner>-->
+    <!--  </div>-->
+
+  </div>
+</div>
+
+
+<!--   <youtube-player videoId="{{videoId}}" [width]="400" [height]="225" ></youtube-player>-->
