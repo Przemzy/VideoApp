@@ -1,6 +1,18 @@
-<h1 mat-dialog-title>{{videoTitle}}</h1>
+<h1 mat-dialog-title>{{data.name}}</h1>
 <div mat-dialog-content>
   <div>
-    <app-display-video videoId="{{videoId}}" size="{{videoSizes.medium}}"></app-display-video>
+    <app-display-video videoId="{{data.uri}}"></app-display-video>
+    <div class="stats">
+      <p><b>Adding date </b>{{data.release_time | date}}</p>
+      <p><b>Likes </b>{{data.metadata.connections.likes.total}}</p>
+      <p><b>Discription </b><p class="description">{{data.description}}</p>
+    </div>
+    <div class="actions">
+      <button mat-button [ngSwitch]="data.isFavorite" (click)="setFavorite()">
+        <mat-icon *ngSwitchCase="false">favorite_border</mat-icon>
+        <mat-icon *ngSwitchCase="true">favorite</mat-icon>
+      </button>
+    <button mat-button color="warn" (click)="this.removeVideo()">Delete</button>
   </div>
+</div>
 </div>

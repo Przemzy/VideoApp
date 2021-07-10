@@ -8,7 +8,7 @@ const routes: Routes = [
     component: MainDashboardComponent,
     children: [
       {
-        path: '',
+        path: 'favourites',
         component:MainDashboardComponent
       }
     ]
@@ -19,7 +19,8 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: MainDashboardComponent
+    redirectTo: 'dashboard',
+    pathMatch: 'full',
   }
 ];
 

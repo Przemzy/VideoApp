@@ -3,6 +3,37 @@
   width: 100%;
   max-width: 1880px;
 }
+.options-bar {
+  margin: 0 25px 10px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+}
+
+.chips {
+  padding: 0 15px;
+}
+
+mat-form-field {
+  margin-top: 5px;
+}
+
+mat-chip:hover {
+  cursor: pointer;
+}
+
+.empty-list{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+}
 
 .buttons {
   display: flex;
@@ -13,8 +44,27 @@
   }
 }
 
+.stats {
+  padding: 0 10px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.img-wrapper {
+  img {
+    transition: ease-in-out 0.2s;
+
+    &:hover{
+      opacity: 0.8;
+      cursor: pointer;
+    }
+  }
+}
+
 .wrapper {
-  background-color: #f7f7f7;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -37,7 +87,6 @@
       object-fit: fill;
     }
   }
-
 }
 
 .wrapper-list {
@@ -45,15 +94,88 @@
   flex-direction: column;
 
   mat-card {
-    width: initial;
+    width: auto;
     max-width: 800px;
     margin: 10px auto;
   }
+
+  mat-card-content {
+    .list-content {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    img {
+      height: auto;
+      width: auto;
+    }
+  }
 }
 
-@media (max-width: 1880px) {
+@media screen and (max-width: 1880px) {
   .wrapper {
     justify-content: center;
   }
+}
 
+@media screen and (max-width: 768px) {
+  .options-bar {
+    justify-content: flex-start;
+  }
+
+  .buttons {
+    display: none;
+  }
+
+  .filters {
+    width: 100%;
+    display: block;
+
+    mat-form-field {
+      width: 100%;
+    }
+
+    .chips {
+      padding: 0;
+    }
+  }
+  .wrapper-list {
+    flex-direction: initial;
+    align-items: center;
+    margin: 10px;
+
+    mat-card {
+      width: 80%;
+      max-width: 600px;
+      margin: 10px auto;
+    }
+
+  }
+}
+
+@media screen and (max-width: 480px) {
+
+  .wrapper {
+    mat-card {
+      width: 330px;
+    }
+
+    mat-card-content {
+      img {
+          height: auto;
+          width: 100%;
+          min-width: 290px;
+        }
+    }
+  }
+
+  .wrapper-list {
+    flex-direction: initial;
+    align-items: center;
+    margin: 10px;
+
+    mat-card {
+      width: 330px;
+    }
+  }
 }

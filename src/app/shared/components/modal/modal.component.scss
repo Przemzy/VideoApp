@@ -1,0 +1,25 @@
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.stats {
+  max-width: 60vw;
+  padding: 0 10px;
+}
+
+.description {
+  overflow: auto;
+  word-break: break-all;
+}
+
+@media screen and (max-width: 480px) {
+  iframe {
+    width: 300px;
+    height: 180px;
+  }
+
+  .stats {
+    padding: 0;
+  }
+}

@@ -1,9 +1,33 @@
 .player-wrapper {
   display: flex;
   justify-content: center;
-  width: 100%;
+  //width: 100%;
 
   .spinner {
     padding: 50px;
+  }
+}
+
+iframe {
+  width: 50vw;
+  height: 45vh;
+}
+
+@media screen and (max-width: 1080px) {
+  iframe {
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  iframe {
+    height: 300px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  iframe {
+    width: 300px;
+    height: 180px;
   }
 }

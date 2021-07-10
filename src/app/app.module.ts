@@ -5,10 +5,14 @@ import { AppComponent } from './app.component';
 import { CoreModule} from "./core/core.module";
 import { DashboardModule} from "./dashboard/dashboard.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {ModalComponent} from "./shared/components/modal/modal.component";
 import {MatDialogModule} from "@angular/material/dialog";
+import {JwtInterceptor} from "./_interceptors/jwt.interceptor";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -23,9 +27,16 @@ import {MatDialogModule} from "@angular/material/dialog";
     BrowserAnimationsModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSelectModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: JwtInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent],
 
 })

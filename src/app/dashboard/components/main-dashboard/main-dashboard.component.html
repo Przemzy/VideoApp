@@ -1,91 +1,116 @@
+<div class="background">
+  <div *ngIf="!loadingVideos">
+    <section class="center" [ngSwitch]="display" >
+      <div class="options-bar">
+        <div class="filters">
+          <div>
+            <mat-form-field appearance="legacy">
+              <mat-label>Filters</mat-label>
+              <mat-select [(ngModel)]=filter (ngModelChange)="handleChange($event)">
+                <mat-option *ngFor="let option of filters" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="chips">
+            <mat-chip-list>
+              <mat-chip (click)="handleChange('All')"
+                        [selected]="selectedChips == 'All'" >All videos</mat-chip>
+              <mat-chip (click)="handleChange('Favorites')"
+                        [selected]="selectedChips == 'Favorites'">Favorites</mat-chip>
+              <mat-chip (click)="handleChange('Remove')"><span style="color: red">Delete all</span></mat-chip>
+            </mat-chip-list>
+          </div>
+        </div>
 
-
-<div class="buttons">
-
-  <button mat-stroked-button color="primary"
-          (click)="displayOptions = display.list"
-          [disabled]="displayOptions == display.list" >
-    <mat-icon class="material-icons">view_list</mat-icon>
-  </button>
-
-  <button mat-stroked-button color="primary"
-          (click)="displayOptions = display.blocks"
-          [disabled]="displayOptions == display.blocks">
-    <mat-icon class="material-icons-outlined">calendar_view_month</mat-icon>
-  </button>
-
-</div>
-<!--<section class="wrapper">-->
-<!--  <div *ngFor="let item of videoList" >-->
-<!--    <div>-->
-<!--      <mat-card>-->
-
-<!--        <mat-card-header>-->
-<!--          <mat-card-title>{{item.snippet.title}}</mat-card-title>-->
-<!--        </mat-card-header>-->
-
-<!--        <mat-card-content>-->
-<!--&lt;!&ndash;          <div class="img-wrapper">&ndash;&gt;-->
-<!--&lt;!&ndash;            <img src='{{item.snippet.thumbnails.medium.url}}'>&ndash;&gt;-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-<!--          <app-display-video videoId="{{item.id.videoId}}"></app-display-video>-->
-<!--          <p>{{item.snippet.description}}</p>-->
-<!--        </mat-card-content>-->
-
-<!--      </mat-card>-->
-
-<!--    </div>-->
-<!--  </div>-->
-
-<!--</section>-->
-<section class="center" [ngSwitch]="displayOptions" >
-
-
-
-    <div class="wrapper" *ngSwitchCase="display.blocks">
-        <div *ngFor="let item of videoList">
-          <mat-card (click)="openModal(item)">
-
-            <mat-card-header>
-              <mat-card-title>Lorem ipsum dolor sit amet.</mat-card-title>
-            </mat-card-header>
-
-            <mat-card-content>
-              <!--          <div class="img-wrapper">-->
-              <!--            <img src='{{item.snippet.thumbnails.medium.url}}'>-->
-              <!--          </div>-->
-              <app-display-video videoId="{{item.id.videoId}}" size="{{videoSize.small}}" ></app-display-video>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, maiores.</p>
-            </mat-card-content>
-
-          </mat-card>
-
+        <div class="buttons">
+          <button mat-flat-button
+                  color="primary"
+                  (click)="display = displayOptions.list"
+                  [disabled]="display == displayOptions.list">
+            <mat-icon class="material-icons">view_list</mat-icon>
+          </button>
+          <button mat-flat-button
+                  color="primary"
+                  (click)="display = displayOptions.blocks"
+                  [disabled]="display == displayOptions.blocks">
+            <mat-icon class="material-icons-outlined">calendar_view_month</mat-icon>
+          </button>
         </div>
       </div>
 
-
-      <div class="wrapper-list" *ngSwitchCase="display.list">
-        <div *ngFor="let item of videoList" >
+      <div class="wrapper" *ngSwitchCase="displayOptions.blocks">
+        <div *ngFor="let item of videoList; index as i">
           <mat-card>
-
             <mat-card-header>
-              <mat-card-title>Lorem ipsum dolor sit amet.</mat-card-title>
+              <mat-card-title>{{item.name}}</mat-card-title>
             </mat-card-header>
-
             <mat-card-content>
-              <!--          <div class="img-wrapper">-->
-              <!--            <img src='{{item.snippet.thumbnails.medium.url}}'>-->
-              <!--          </div>-->
-              <app-display-video videoId="{{item.id.videoId}}" size="{{videoSize.medium}}" ></app-display-video>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, maiores.</p>
+              <div class="img-wrapper" (click)="openModal(item, i)">
+                <img src='{{item.pictures.sizes[2].link}}' alt="">
+              </div>
+              <div class="stats">
+                <p><b>Adding date </b>{{item.release_time | date}}</p>
+                <p><b>Likes </b>{{item.metadata.connections.likes.total}}</p>
+              </div>
+              <div class="actions">
+                <button mat-button [ngSwitch]="item.isFavorite" (click)="setFavorite(item.name)">
+                  <mat-icon *ngSwitchCase="false">favorite_border</mat-icon>
+                  <mat-icon *ngSwitchCase="true">favorite</mat-icon>
+                </button>
+                <button mat-button
+                        color="warn"
+                        (click)="removeVideo(i)">Delete</button>
+              </div>
             </mat-card-content>
-
           </mat-card>
-
         </div>
+        <div *ngIf="videoList.length == 0" class="empty-list">
+          <h2>Video list is empty</h2>
+        </div>
+
       </div>
 
+      <div class="wrapper-list" *ngSwitchCase="displayOptions.list">
+        <div *ngFor="let item of videoList; index as i" >
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>{{item.name}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="list-content">
+                <div class="img-wrapper" (click)="openModal(item, i)">
+                  <img src='{{item.pictures.sizes[2].link}}' alt="">
+                </div>
+                <div class="stats">
+                  <p><b>Adding date </b>{{item.release_time | date}}</p>
+                  <p><b>Likes </b>{{item.metadata.connections.likes.total}}</p>
+                </div>
+              </div>
+              <div class="actions">
+                <button mat-button [ngSwitch]="item.isFavorite" (click)="setFavorite(item.name)">
+                  <mat-icon *ngSwitchCase="false">favorite_border</mat-icon>
+                  <mat-icon *ngSwitchCase="true">favorite</mat-icon>
+                </button>
+                <button mat-button
+                        color="warn"
+                        (click)="removeVideo(i)">Delete</button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
 
+        <div *ngIf="videoList.length == 0" class="empty-list">
+          <h2>Video list is empty</h2>
+        </div>
+      </div>
+    </section>
+  </div>
 
-</section>
+  <div *ngIf="loadingVideos" class="loader">
+    <mat-spinner strokeWidth="5" diameter="50"></mat-spinner>
+  </div>
+</div>
+
 
