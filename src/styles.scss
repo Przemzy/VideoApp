@@ -17,3 +17,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   display: flex;
   justify-content: center
 }
+
+.open-animation {
+  animation-name: animateTable;
+  animation-duration: 1s;
+  position: relative;
+}
+
+@keyframes animateTable {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -19,7 +19,7 @@
                         [selected]="selectedChips == 'All'" >All videos</mat-chip>
               <mat-chip (click)="handleChange('Favorites')"
                         [selected]="selectedChips == 'Favorites'">Favorites</mat-chip>
-              <mat-chip (click)="handleChange('Remove')"><span style="color: red">Delete all</span></mat-chip>
+              <mat-chip (click)="redirectTo()"><span style="color: green"><a ></a>Options</span></mat-chip>
             </mat-chip-list>
           </div>
         </div>
@@ -40,14 +40,14 @@
         </div>
       </div>
 
-      <div class="wrapper" *ngSwitchCase="displayOptions.blocks">
+      <div class="wrapper open-animation" *ngSwitchCase="displayOptions.blocks">
         <div *ngFor="let item of videoList; index as i">
           <mat-card>
             <mat-card-header>
               <mat-card-title>{{item.name}}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <div class="img-wrapper" (click)="openModal(item, i)">
+              <div class="img-wrapper" (click)="openModal(item)">
                 <img src='{{item.pictures.sizes[2].link}}' alt="">
               </div>
               <div class="stats">
@@ -55,7 +55,7 @@
                 <p><b>Likes </b>{{item.metadata.connections.likes.total}}</p>
               </div>
               <div class="actions">
-                <button mat-button [ngSwitch]="item.isFavorite" (click)="setFavorite(item.name)">
+                <button mat-button [ngSwitch]="item.isFavorite" (click)="setFavorite(item.uri)">
                   <mat-icon *ngSwitchCase="false">favorite_border</mat-icon>
                   <mat-icon *ngSwitchCase="true">favorite</mat-icon>
                 </button>
@@ -66,13 +66,13 @@
             </mat-card-content>
           </mat-card>
         </div>
-        <div *ngIf="videoList.length == 0" class="empty-list">
+        <div *ngIf="videoList.length == 0 && videoList" class="empty-list">
           <h2>Video list is empty</h2>
         </div>
 
       </div>
 
-      <div class="wrapper-list" *ngSwitchCase="displayOptions.list">
+      <div class="wrapper-list open-animation" *ngSwitchCase="displayOptions.list">
         <div *ngFor="let item of videoList; index as i" >
           <mat-card>
             <mat-card-header>
@@ -80,7 +80,7 @@
             </mat-card-header>
             <mat-card-content>
               <div class="list-content">
-                <div class="img-wrapper" (click)="openModal(item, i)">
+                <div class="img-wrapper" (click)="openModal(item)">
                   <img src='{{item.pictures.sizes[2].link}}' alt="">
                 </div>
                 <div class="stats">
@@ -89,7 +89,7 @@
                 </div>
               </div>
               <div class="actions">
-                <button mat-button [ngSwitch]="item.isFavorite" (click)="setFavorite(item.name)">
+                <button mat-button [ngSwitch]="item.isFavorite" (click)="setFavorite(item.uri)">
                   <mat-icon *ngSwitchCase="false">favorite_border</mat-icon>
                   <mat-icon *ngSwitchCase="true">favorite</mat-icon>
                 </button>
@@ -101,7 +101,7 @@
           </mat-card>
         </div>
 
-        <div *ngIf="videoList.length == 0" class="empty-list">
+        <div *ngIf="videoList.length == 0 && videoList" class="empty-list">
           <h2>Video list is empty</h2>
         </div>
       </div>

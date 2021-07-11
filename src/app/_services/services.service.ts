@@ -18,6 +18,16 @@ export class ServicesService {
 
   searchVimeoVideos(search: any): Observable<any> {
     const params = new HttpParams({fromObject : {...search}});
-    return this.http.get<any>(this.apiUrl + servicesUrl.SearchVimeoVideos, {params} )
+    return this.http.get<any>(this.apiUrl + servicesUrl.SearchVimeoVideos, {params})
+  }
+
+ getVideoById(videoid: number): Observable<any> {
+    const id = '/'+ videoid
+    return this.http.get<any>(this.apiUrl + servicesUrl.SearchVimeoVideos + id)
+  }
+
+  getVideoByUris(videoUri: any): Observable<any> {
+    const params = new HttpParams().append('uris', videoUri);
+    return this.http.get<any>(this.apiUrl + servicesUrl.SearchVimeoVideos, {params})
   }
 }
