@@ -21,7 +21,7 @@
   button {
     width: 40px !important;
     height: 40px;
-    margin-left: 20px !important;
+    margin: 0 0 0 20px !important;
   }
 }
 
@@ -46,8 +46,8 @@ p {
 }
 
 mat-card {
-  margin-top: 50px;
-  min-width: 50vw;
+  width: 860px;
+  margin-top: 30px;
 }
 
 mat-form-field {
@@ -76,6 +76,7 @@ mat-form-field {
 }
 
 .navigation-uris {
+  padding: 25px 0 15px 0 ;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -94,12 +95,31 @@ mat-form-field {
 
 .content-multiple {
   @extend .content;
-  padding: 30px 0 0 0 ;
 
 }
+@media screen and (max-width: 1080px) {
+  mat-card {
+    width: 650px ;
+  }
+}
 
+@media screen and (max-width: 768px) {
+  mat-card {
+    width: 500px ;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  mat-card {
+    width: 400px ;
+  }
+}
 
 @media screen and (max-width: 480px) {
+  mat-card {
+    width: 360px ;
+  }
+
   .content {
     padding: 0;
     margin: 15px;

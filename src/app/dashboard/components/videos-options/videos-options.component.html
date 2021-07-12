@@ -2,12 +2,11 @@
   <div class="options open-animation">
       <mat-card>
         <mat-card-content>
-          <div>
             <div class="content">
               <div class="search-video">
                 <div class="navigation">
                   <h2>Add video by Id number</h2>
-                  <button mat-mini-fab (click)="goToDashboard()" color="primary"><mat-icon>arrow_back</mat-icon></button>
+                  <button mat-button (click)="goToDashboard()" color="primary"><mat-icon>arrow_back</mat-icon></button>
                 </div>
                 <form [formGroup]="searchVideoForm" >
                   <mat-form-field appearance="legacy" >
@@ -40,18 +39,18 @@
               <div *ngIf="!videoInformation && loading " class="loader">
                 <mat-spinner strokeWidth="5" diameter="50"></mat-spinner>
               </div>
-            </div>
-
-<!--            <div class="removeAll">-->
-<!--              <button mat-flat-button color="warn" (click)="deleteAllVideos()" >Delete all videos</button>-->
-<!--            </div>-->
           </div>
+        </mat-card-content>
+      </mat-card>
         <mat-divider></mat-divider>
 
+    <mat-card>
+      <mat-card-content>
           <div class="content-multiple">
-              <div class="navigation">
-                <h2>Add multiple videos</h2>
-              </div>
+            <div class="navigation">
+              <h2>Add multiple videos</h2>
+              <button mat-button (click)="goToDashboard()" color="primary"><mat-icon>arrow_back</mat-icon></button>
+            </div>
 
               <form [formGroup]="getMultiplyVideos" class="navigation-uris" >
                 <mat-form-field appearance="legacy" >

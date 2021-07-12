@@ -74,7 +74,7 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     }
   }
 
-  handleChange(event: any) {
+  handleChange(event: string) {
     switch (event) {
       case 'Newest':
         this.setNewestVideos(this.allVideos)
