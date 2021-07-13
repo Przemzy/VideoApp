@@ -64,8 +64,11 @@ export class VideosOptionsComponent implements OnInit {
   }
 
   pushVideoUriToList() {
-    this.videoUrisList.push(this.getMultiplyVideos.get('videoUri')?.value)
-    this.getMultiplyVideos.get('videoUri')?.setValue('')
+    const videoUri = this.getMultiplyVideos.get('videoUri')?.value
+    if (videoUri) {
+      this.videoUrisList.push(videoUri)
+      this.getMultiplyVideos.get('videoUri')?.setValue('')
+    }
   }
 
   getErrorMessage() {
