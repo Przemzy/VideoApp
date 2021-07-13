@@ -152,6 +152,7 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
       this.allVideos = this.videoList
     },error => {
       this.snackbar.openSnackBar(error.error)
+      this.loadingVideos = false
     })
   }
 

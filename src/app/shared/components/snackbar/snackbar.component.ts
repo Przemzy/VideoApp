@@ -14,7 +14,7 @@ export class SnackbarComponent{
     this.snackbar.open(text, '', {
       horizontalPosition: 'end',
       verticalPosition: 'top',
-      duration: 2000
+      duration: 3000
     })
   }
 }

@@ -6,7 +6,6 @@
 
 .content {
   margin: 0 auto 30px auto;
-  //width: 645px;
 }
 
 .navigation {
@@ -38,6 +37,12 @@
 
 img {
   object-fit: contain;
+  transition: ease-in-out 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
 }
 
 p {
@@ -76,10 +81,10 @@ mat-form-field {
 }
 
 .navigation-uris {
+  width: 100%;
   padding: 25px 0 15px 0 ;
   display: flex;
   justify-content: space-between;
-  width: 100%;
 
   mat-form-field {
     width: 100%;

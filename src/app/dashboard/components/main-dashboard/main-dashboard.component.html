@@ -53,6 +53,7 @@
               <div class="stats">
                 <p><b>Adding date </b>{{item.release_time | date}}</p>
                 <p><b>Likes </b>{{item.metadata.connections.likes.total}}</p>
+                <p><b>Plays </b>{{item.stats.plays == null ? '0' : item.stats.plays}}</p>
               </div>
               <div class="actions">
                 <button mat-button [ngSwitch]="item.isFavorite" (click)="setFavorite(item.uri)">
@@ -86,6 +87,7 @@
                 <div class="stats">
                   <p><b>Adding date </b>{{item.release_time | date}}</p>
                   <p><b>Likes </b>{{item.metadata.connections.likes.total}}</p>
+                  <p><b>Plays </b>{{item.stats.plays == null ? '0' : item.stats.plays}}</p>
                 </div>
               </div>
               <div class="actions">

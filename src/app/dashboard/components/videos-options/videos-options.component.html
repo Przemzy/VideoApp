@@ -6,23 +6,33 @@
               <div class="search-video">
                 <div class="navigation">
                   <h2>Add video by Id number</h2>
-                  <button mat-button (click)="goToDashboard()" color="primary"><mat-icon>arrow_back</mat-icon></button>
+                  <button mat-button
+                          (click)="goToDashboard()"
+                          color="primary"
+                          title="back to videos">
+                    <mat-icon>arrow_back</mat-icon>
+                  </button>
                 </div>
-                <form [formGroup]="searchVideoForm" >
+
+                <form [formGroup]="searchVideoForm">
                   <mat-form-field appearance="legacy" >
                     <mat-label>Video id</mat-label>
                     <input matInput formControlName="videoId" pattern="[0-9]+">
                     <mat-error *ngIf="!searchVideoForm.valid">{{getErrorMessage()}}</mat-error>
                   </mat-form-field>
-                  <button mat-flat-button color="primary" (click)="getVideoById()" [disabled]="lockButtons">Search</button>
+                  <button mat-flat-button
+                          color="primary"
+                          (click)="getVideoById()"
+                          [disabled]="lockButtons || !searchVideoForm.valid">Search
+                  </button>
                 </form>
-
               </div>
 
             <div class="info ">
               <div *ngIf="videoInformation">
                 <div class="info-content open-animation">
-                  <img src='{{videoInformation.pictures.sizes[2].link}}' alt="">
+                  <img src='{{videoInformation.pictures.sizes[2].link}}' alt=""
+                       (click)="openBlank(videoInformation.uri)">
                   <div>
                     <h3><b>Video informations</b></h3>
                     <p><b>Name </b>{{videoInformation.name}}</p>
@@ -49,57 +59,65 @@
           <div class="content-multiple">
             <div class="navigation">
               <h2>Add multiple videos</h2>
-              <button mat-button (click)="goToDashboard()" color="primary"><mat-icon>arrow_back</mat-icon></button>
+              <button mat-button
+                      (click)="goToDashboard()"
+                      color="primary"
+                      title="back to videos">
+                <mat-icon>arrow_back</mat-icon>
+              </button>
             </div>
 
-              <form [formGroup]="getMultiplyVideos" class="navigation-uris" >
-                <mat-form-field appearance="legacy" >
-                  <mat-label>Video Uri</mat-label>
-                  <input matInput formControlName="videoUri">
-                </mat-form-field>
-                <button mat-mini-fab color="#ededed"
-                        (click)="pushVideoUriToList()"
-                        [disabled]="lockButtons">
-                  <mat-icon color="primary">add</mat-icon>
-                </button>
-              </form>
+                <form [formGroup]="getMultiplyVideos" class="navigation-uris" >
+                  <mat-form-field appearance="legacy" >
+                    <mat-label>Video Uri</mat-label>
+                    <input matInput formControlName="videoUri">
+                  </mat-form-field>
+                  <button mat-mini-fab color="#ededed"
+                          (click)="pushVideoUriToList()"
+                          [disabled]="lockButtons">
+                    <mat-icon color="primary">add</mat-icon>
+                  </button>
+                </form>
 
 
-              <div class="display-uris">
-                <div *ngFor="let item of videoUrisList">
-                  <p>{{item}}</p>
+                <div class="display-uris">
+                  <div *ngFor="let item of videoUrisList">
+                    <p>{{item}}</p>
+                  </div>
+                  <button mat-flat-button
+                          color="primary"
+                          [disabled]="lockButtons || !videoUrisList "
+                         (click)="getVideosByUris()">Preview
+                  </button>
                 </div>
-                <button mat-flat-button color="primary"
-                        [disabled]="lockButtons "
-                       (click)="getVideosByUris()">Preview</button>
-              </div>
 
 
-             <div *ngIf="videoList" class="info">
-               <div *ngFor="let item of videoList">
-                 <div class="info-content open-animation">
-                   <img src='{{item.pictures.sizes[2].link}}' alt="">
-                   <div>
-                     <h3><b>Video informations</b></h3>
-                     <p><b>Name </b>{{item.name}}</p>
-                     <p><b>Likes </b>{{item.metadata.connections.likes.total}}</p>
-                     <p><b>Creation date </b>{{item.created_time | date}}</p>
+               <div *ngIf="videoList" class="info">
+                 <div *ngFor="let item of videoList">
+                   <div class="info-content open-animation">
+                     <img src='{{item.pictures.sizes[2].link}}' alt="" (click)="openBlank(item.uri)" text>
+                     <div>
+                       <h3><b>Video information</b></h3>
+                       <p><b>Name </b>{{item.name}}</p>
+                       <p><b>Likes </b>{{item.metadata.connections.likes.total}}</p>
+                       <p><b>Plays </b>{{item.stats.plays == null ? '0' : item.stats.plays}}</p>
+                       <p><b>Creation date </b>{{item.created_time | date}}</p>
+                     </div>
                    </div>
                  </div>
+                   <button mat-flat-button
+                           color="primary"
+                           [disabled]="lockButtons "
+                           (click)="addVideosToList()">Add all to list
+                   </button>
                </div>
-               <button mat-flat-button color="primary"
-                       [disabled]="lockButtons "
-                       (click)="addVideosToList()">Add all to list</button>
-             </div>
 
             <div *ngIf="!videoList && loadingUris " class="loader">
               <mat-spinner strokeWidth="5" diameter="50"></mat-spinner>
             </div>
 
-
             </div>
         </mat-card-content>
       </mat-card>
-
     </div>
 </section>

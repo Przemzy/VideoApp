@@ -40,8 +40,7 @@ export class VideosOptionsComponent implements OnInit {
       })
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   goToDashboard() {return this.router.navigate(['/dashboard'])}
 
@@ -59,7 +58,7 @@ export class VideosOptionsComponent implements OnInit {
   addVideosToList() {
     if (this.videoList) {
       localStorage.videoList = JSON.stringify(this.videoList)
-      this.snackbar.openSnackBar('New videos was added to list 👌')
+      this.snackbar.openSnackBar('New videos have been added to list 👌')
       this.videoList = null
     }
   }
@@ -67,11 +66,17 @@ export class VideosOptionsComponent implements OnInit {
   pushVideoUriToList() {
     this.videoUrisList.push(this.getMultiplyVideos.get('videoUri')?.value)
     this.getMultiplyVideos.get('videoUri')?.setValue('')
-    console.log(this.videoList)
   }
 
   getErrorMessage() {
-   return this.searchVideoForm.get('videoId')?.hasError('pattern') ? 'Only numbers' : ''
+   return this.searchVideoForm.get('videoId')?.hasError('pattern')
+     ? 'Only numbers'
+     : 'This field is required'
+  }
+
+  openBlank(item: string) {
+    const videoId = item.replace('/videos/', '')
+    return window.open('https://vimeo.com/' + videoId, '_blank')
   }
 
   getVideoById() {
@@ -85,7 +90,6 @@ export class VideosOptionsComponent implements OnInit {
         if (data) {
           this.videoInformation = data
         }
-
         this.loading = false
         this.lockButtons = false
 
@@ -94,7 +98,6 @@ export class VideosOptionsComponent implements OnInit {
         this.snackbar.openSnackBar(error.error)
         this.loading = false
         this.lockButtons = false
-
       })
     }
   }
@@ -118,6 +121,4 @@ export class VideosOptionsComponent implements OnInit {
       })
     }
   }
-
-
 }

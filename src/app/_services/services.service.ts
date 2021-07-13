@@ -21,7 +21,7 @@ export class ServicesService {
     return this.http.get<any>(this.apiUrl + servicesUrl.SearchVimeoVideos, {params})
   }
 
- getVideoById(videoId: number): Observable<any> {
+  getVideoById(videoId: number): Observable<any> {
     const id = '/'+ videoId
     return this.http.get<any>(this.apiUrl + servicesUrl.SearchVimeoVideos + id)
   }
