@@ -19,7 +19,8 @@
                         [selected]="selectedChips == 'All'" >All videos</mat-chip>
               <mat-chip (click)="handleChange('Favorites')"
                         [selected]="selectedChips == 'Favorites'">Favorites</mat-chip>
-              <mat-chip (click)="redirectTo()"><span style="color: green"><a ></a>Options</span></mat-chip>
+              <mat-chip (click)="redirectTo()"><span style="color: green">Add new</span></mat-chip>
+              <mat-chip (click)="handleChange('Remove')"><span style="color: darkred">Delete all</span></mat-chip>
             </mat-chip-list>
           </div>
         </div>

@@ -44,11 +44,6 @@ export class VideosOptionsComponent implements OnInit {
 
   goToDashboard() {return this.router.navigate(['/dashboard'])}
 
-  deleteAllVideos() {
-    this.snackbar.openSnackBar('Your video list is empty!')
-    localStorage.deleteAllVideos = true;
-  }
-
   addToVideoList(item:any) {
     this.snackbar.openSnackBar('Video added to list 👍')
     localStorage.newVideo = JSON.stringify(item)

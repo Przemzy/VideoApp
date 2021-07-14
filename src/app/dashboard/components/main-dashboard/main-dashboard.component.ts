@@ -58,20 +58,7 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if ('deleteAllVideos' in localStorage) {
-      const deleteVideos = localStorage.deleteAllVideos
-
-      if (deleteVideos) {
-        this.videoList = []
-        this.allVideos = []
-        this.loadingVideos = false
-        localStorage.removeItem('deleteAllVideos')
-      } else {
-        this.searchVimeoVideos()
-      }
-    } else {
-      this.searchVimeoVideos()
-    }
+    this.searchVimeoVideos();
   }
 
   handleChange(event: string) {
