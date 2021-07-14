@@ -16,9 +16,9 @@
           <div class="chips">
             <mat-chip-list>
               <mat-chip (click)="handleChange('All')"
-                        [selected]="selectedChips == 'All'" >All videos</mat-chip>
+                        [selected]="selectedChips == 'All'" ><span>All videos</span></mat-chip>
               <mat-chip (click)="handleChange('Favorites')"
-                        [selected]="selectedChips == 'Favorites'">Favorites</mat-chip>
+                        [selected]="selectedChips == 'Favorites'"><span>Favorites</span></mat-chip>
               <mat-chip (click)="redirectTo()"><span style="color: green">Add new</span></mat-chip>
               <mat-chip (click)="handleChange('Remove')"><span style="color: darkred">Delete all</span></mat-chip>
             </mat-chip-list>
@@ -44,28 +44,28 @@
       <div class="wrapper open-animation" *ngSwitchCase="displayOptions.blocks">
         <div *ngFor="let item of videoList; index as i">
           <mat-card>
-            <mat-card-header>
+            <div class="img-wrapper" (click)="openModal(item)">
+            <img mat-card-image src='{{item.pictures.sizes[2].link}}' alt="">
+            </div>
               <mat-card-title>{{item.name}}</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <div class="img-wrapper" (click)="openModal(item)">
-                <img src='{{item.pictures.sizes[2].link}}' alt="">
-              </div>
-              <div class="stats">
-                <p><b>Adding date </b>{{item.release_time | date}}</p>
-                <p><b>Likes </b>{{item.metadata.connections.likes.total}}</p>
-                <p><b>Plays </b>{{item.stats.plays == null ? '0' : item.stats.plays}}</p>
-              </div>
-              <div class="actions">
-                <button mat-button [ngSwitch]="item.isFavorite" (click)="setFavorite(item.uri)">
-                  <mat-icon *ngSwitchCase="false">favorite_border</mat-icon>
-                  <mat-icon *ngSwitchCase="true">favorite</mat-icon>
-                </button>
-                <button mat-button
-                        color="warn"
-                        (click)="removeVideo(i)">Delete</button>
-              </div>
+            <mat-card-content class="stats">
+                <p>{{item.stats.plays == null ? '0' : item.stats.plays}} plays • <span>{{item.metadata.connections.likes.total}} likes</span></p>
+<!--                <p>{{item.stats.plays == null ? '0' : item.stats.plays}} plays</p>-->
+                <p title="adding date">{{item.release_time | date}}</p>
             </mat-card-content>
+            <mat-card-actions>
+              <button mat-button [ngSwitch]="item.isFavorite" (click)="setFavorite(item.uri)" class="like" title="set favorite" >
+<!--                <span *ngSwitchCase="false">LIKE</span>-->
+<!--                <span *ngSwitchCase="true">UNLIKE</span>-->
+                <mat-icon *ngSwitchCase="false">favorite_border</mat-icon>
+                <mat-icon *ngSwitchCase="true">favorite</mat-icon>
+              </button>
+              <button mat-button
+                      (click)="removeVideo(i)"
+                      class="delete">
+                <mat-icon *ngSwitchCase="true" title="remove video">delete</mat-icon>
+              </button>
+            </mat-card-actions>
           </mat-card>
         </div>
         <div *ngIf="videoList.length == 0 && videoList" class="empty-list">

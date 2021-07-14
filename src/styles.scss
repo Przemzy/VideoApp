@@ -24,11 +24,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   position: relative;
 }
 
+
+
 @keyframes animateTable {
   from {
     opacity: 0;
   }
   to {
     opacity: 1;
+  }
+}
+
+
+//////////material fix
+
+mat-chip {
+  span {
+    font-weight: 400;
   }
 }
