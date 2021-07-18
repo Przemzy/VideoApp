@@ -16,6 +16,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {ErrorInterceptor} from "./_interceptors/error.interceptor";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatDividerModule} from "@angular/material/divider";
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatSelectModule,
     MatSnackBarModule,
     MatSidenavModule,
+    MatDividerModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

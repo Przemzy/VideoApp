@@ -2,6 +2,12 @@
 <div>
   <app-toolbar></app-toolbar>
 </div>
+<div style="display: flex; padding-top: 55px">
+  <app-menu></app-menu>
+  <mat-divider [vertical]="true"></mat-divider>
+  <div style="width: 100%">
+    <router-outlet></router-outlet>
+  </div>
 
-<router-outlet></router-outlet>
 
+</div>

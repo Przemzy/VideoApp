@@ -1,1 +1,6 @@
-<p>menu</p>
+<mat-nav-list style="width: 250px">
+  <mat-list-item *ngFor="let page of pages" [routerLink]="page.link" routerLinkActive="active" >
+  <span>{{page.name}}</span>
+  </mat-list-item>
+
+</mat-nav-list>

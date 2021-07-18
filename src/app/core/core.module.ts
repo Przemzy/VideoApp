@@ -7,6 +7,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {RouterModule} from "@angular/router";
+import {MatList, MatListModule, MatNavList} from '@angular/material/list';
+
 
 
 
@@ -19,7 +21,9 @@ import {RouterModule} from "@angular/router";
   exports: [
     MenuComponent,
     MatToolbarModule,
-    ToolbarComponent
+    ToolbarComponent,
+    MatNavList,
+    MatList
   ],
   imports: [
     CommonModule,
@@ -27,7 +31,8 @@ import {RouterModule} from "@angular/router";
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
-    RouterModule
+    RouterModule,
+    MatListModule
   ]
 })
 export class CoreModule { }
