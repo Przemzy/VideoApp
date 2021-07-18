@@ -1,10 +1,14 @@
 .toolbar {
+  height: 56px;
   position: fixed;
   z-index: 1;
   width: 100%;
   display: flex;
   justify-content: space-between;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5)  !important;
+  background: linear-gradient(-45deg, #143e43, #4dd1cc, #5a7670);
+  background-size: 400% 400%;
+  animation: gradient 20s ease infinite;
   //opacity: 0.4;
 
   //.wrapper {
@@ -36,7 +40,7 @@ nav {
 a {
   text-decoration: none;
   padding: 0 16px;
-  font-size: 16px;
+  font-size: 14px;
   color: white;
 }
 

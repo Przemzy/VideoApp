@@ -25,6 +25,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   position: relative;
 }
 
+$primary-color: #143e43;
+$accent-color: #4dd1cc;
+$optional-color: #5a7670;
+
 
 
 @keyframes animateTable {
@@ -36,11 +40,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 }
 
-
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 //////////material fix
 
 mat-chip {
   span {
     font-weight: 400;
   }
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: $primary-color;
 }
