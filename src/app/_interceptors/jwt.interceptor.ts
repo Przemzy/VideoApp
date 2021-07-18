@@ -11,7 +11,7 @@ import {environment} from "../../environments/environment";
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-  token = ''
+  token = '5f7c5aeb2fd29b3566e678fa84ff0a0b'
 
   constructor() {}
 
@@ -23,14 +23,14 @@ export class JwtInterceptor implements HttpInterceptor {
          'Bearer ' + this.token)
      });
 
-     // if (!environment.production) {
-     //   console.log(request)
-     // }
+     if (!environment.production) {
+       console.log(request)
+     }
      return (next.handle(cloned))
    } else {
-     // if (!environment.production) {
-     //   console.log(request)
-     // }
+     if (!environment.production) {
+       console.log(request)
+     }
      return next.handle(request)
    }
   }

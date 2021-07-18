@@ -13,10 +13,16 @@
 .filters {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .chips {
   padding: 0 15px;
+}
+
+mat-card {
+  //box-shadow: none !important;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px  !important;
 }
 
 mat-form-field {
@@ -43,6 +49,7 @@ mat-card-header {
 }
 
 .buttons {
+  width: 100%;
   display: flex;
   justify-content: flex-end;
 
@@ -51,6 +58,11 @@ mat-card-header {
   }
 }
 
+.stats-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 
 .stats {
   color: rgba(0, 0, 0, .6);;
@@ -100,8 +112,15 @@ mat-card-header {
   @extend .wrapper;
   flex-direction: column;
 
+  .content-list {
+    display: flex;
+  }
+
   mat-card {
+    display: flex;
+    flex-wrap: wrap;
     width: auto;
+    padding: 0 !important;
     max-width: 800px;
     margin: 10px auto;
   }
