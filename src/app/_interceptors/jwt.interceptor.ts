@@ -11,16 +11,18 @@ import {environment} from "../../environments/environment";
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-  token = ''
+  vimeoToken = '5f7c5aeb2fd29b3566e678fa84ff0a0b'
+  youtubeToken = ''
 
   constructor() {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-   if (this.token) {
+   if (this.vimeoToken || this.youtubeToken) {
      const cloned = request.clone( {
        headers: request.headers.set('Authorization',
-         'Bearer ' + this.token)
+         // 'Bearer ' + this.setToken(request))
+         'Bearer ' + this.vimeoToken)
      });
 
      // if (!environment.production) {
@@ -34,4 +36,15 @@ export class JwtInterceptor implements HttpInterceptor {
      return next.handle(request)
    }
   }
+
+  // setToken(request: any) {
+  //   let returnToken = ''
+  //
+  //   request.url.includes(environment.apiUrlVimeo)
+  //     ?  returnToken = this.vimeoToken
+  //     : returnToken = this.youtubeToken
+  //
+  //   return returnToken
+  // }
+
 }
