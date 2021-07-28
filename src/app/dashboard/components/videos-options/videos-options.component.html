@@ -31,13 +31,13 @@
             <div class="info ">
               <div *ngIf="videoInformation">
                 <div class="info-content open-animation">
-                  <img src='{{videoInformation.pictures.sizes[2].link}}' alt=""
+                  <img src='{{videoInformation.img}}' alt=""
                        (click)="openBlank(videoInformation.uri)">
                   <div>
                     <h3><b>Video informations</b></h3>
                     <p><b>Name </b>{{videoInformation.name}}</p>
-                    <p><b>Likes </b>{{videoInformation.metadata.connections.likes.total}}</p>
-                    <p><b>Creation date </b>{{videoInformation.created_time | date}}</p>
+                    <p><b>Likes </b>{{videoInformation.likes}}</p>
+                    <p><b>Creation date </b>{{videoInformation.releaseTime | date}}</p>
                   </div>
                 </div>
                 <button mat-flat-button color="primary"
@@ -95,13 +95,13 @@
                <div *ngIf="videoList" class="info">
                  <div *ngFor="let item of videoList">
                    <div class="info-content open-animation">
-                     <img src='{{item.pictures.sizes[2].link}}' alt="" (click)="openBlank(item.uri)" text>
+                     <img src='{{item.img}}' alt="" (click)="openBlank(item.uri)">
                      <div>
                        <h3><b>Video information</b></h3>
                        <p><b>Name </b>{{item.name}}</p>
-                       <p><b>Likes </b>{{item.metadata.connections.likes.total}}</p>
-                       <p><b>Plays </b>{{item.stats.plays == null ? '0' : item.stats.plays}}</p>
-                       <p><b>Creation date </b>{{item.created_time | date}}</p>
+                       <p><b>Likes </b>{{item.likes}}</p>
+                       <p><b>Plays </b>{{item.plays}}</p>
+                       <p><b>Creation date </b>{{item.releaseTime | date}}</p>
                      </div>
                    </div>
                  </div>

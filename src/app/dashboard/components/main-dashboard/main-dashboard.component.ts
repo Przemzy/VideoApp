@@ -7,6 +7,7 @@ import {HelperService} from "../../../_services/helper.service";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import {SnackbarComponent} from "../../../shared/components/snackbar/snackbar.component";
+import {VideoModel} from "../../../models/videoModel";
 
 
 @Component({
@@ -22,8 +23,8 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
 
   displayOptions = DisplayOptionsEnum
 
-  videoList: any
-  allVideos: any
+  videoList: VideoModel[]
+  allVideos: VideoModel[]
 
   display = this.displayOptions.blocks
   loadingVideos = true
@@ -84,14 +85,14 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
   }
 
   setOldestVideos(list: any) {
-    list.sort(function (a: { release_time: Date; }, b: { release_time: Date; }) {
-      return new Date(a.release_time).getTime() - new Date(b.release_time).getTime();
+    list.sort(function (a: { releaseTime: Date; }, b: { releaseTime: Date; }) {
+      return new Date(a.releaseTime).getTime() - new Date(b.releaseTime).getTime();
     })
   }
 
   setNewestVideos(list: any) {
-    list.sort(function (a: { release_time: Date; }, b: { release_time: Date; }) {
-      return new Date(b.release_time).getTime() - new Date(a.release_time).getTime();
+    list.sort(function (a: { releaseTime: Date; }, b: { releaseTime: Date; }) {
+      return new Date(b.releaseTime).getTime() - new Date(a.releaseTime).getTime();
     })
   }
 
@@ -100,25 +101,22 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     this.selectedChips = 'Favorites'
   }
 
-  openModal(item: any) {
+  openModal(item: VideoModel) {
     this.dialog.open(ModalComponent, {data: {...item}})
   }
 
   getVideosFromStorage() {
     if ('newVideo' in localStorage) {
       const newVideo = JSON.parse(localStorage.newVideo)
-      this.videoList.push({...newVideo, isFavorite: false})
-      this.allVideos.push({...newVideo, isFavorite: false})
+      this.videoList.push({...newVideo})
+      this.allVideos.push({...newVideo})
 
       localStorage.removeItem('newVideo');
     }
 
     if ('videoList' in localStorage) {
-      const newList = Array.from(JSON.parse(localStorage.videoList))
-      newList.map( f => Object.assign(f, {isFavorite: false}))
-
-      this.videoList.push(...newList)
-      this.allVideos.push(...newList)
+      this.allVideos = Array.from(JSON.parse(localStorage.videoList));
+      this.videoList = Array.from(JSON.parse(localStorage.videoList));
 
       localStorage.removeItem('videoList');
     }
@@ -132,7 +130,16 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     this.service.searchVimeoVideos({query: 'dogs'}).subscribe( data => {
       if (data) {
         data.data.forEach( (f: any) => {
-          this.videoList.push({...f, isFavorite: false})
+          this.videoList.push({
+            name: f.name,
+            img: f.pictures.sizes[2].link,
+            isFavorite: false,
+            likes: f.metadata.connections.likes.total,
+            plays: f.stats.plays == null ? 0 : f.item.stats.plays,
+            releaseTime: f.release_time,
+            uri: f.uri,
+            description: f.description
+          })
         })
       }
       this.loadingVideos = false
@@ -147,7 +154,10 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
 
   setFavorite(uri: string) {
     const video = this.videoList.find( (f: { uri: string; }) => f.uri === uri)
-    return video.isFavorite = !video.isFavorite;
+    if (video) {
+      return video.isFavorite = !video.isFavorite;
+    }
+    return
   }
 
   redirectTo() {

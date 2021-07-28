@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {HelperService} from "../../../_services/helper.service";
+import {VideoModel} from "../../../models/videoModel";
 
 @Component({
   selector: 'app-modal',
@@ -9,7 +10,7 @@ import {HelperService} from "../../../_services/helper.service";
 })
 export class ModalComponent{
 
-  constructor(@Inject(MAT_DIALOG_DATA,) public data:any,
+  constructor(@Inject(MAT_DIALOG_DATA,) public data:VideoModel,
               private helperService: HelperService) {
   }
 

@@ -49,12 +49,12 @@
             </mat-card-header>
             <mat-card-content>
               <div class="img-wrapper" (click)="openModal(item)">
-                <img src='{{item.pictures.sizes[2].link}}' alt="">
+                <img src='{{item.img}}' alt="">
               </div>
               <div class="stats">
-                <p><b>Adding date </b>{{item.release_time | date}}</p>
-                <p><b>Likes </b>{{item.metadata.connections.likes.total}}</p>
-                <p><b>Plays </b>{{item.stats.plays == null ? '0' : item.stats.plays}}</p>
+                <p><b>Adding date </b>{{item.releaseTime | date}}</p>
+                <p><b>Likes </b>{{item.likes}}</p>
+                <p><b>Plays </b>{{item.plays}}</p>
               </div>
               <div class="actions">
                 <button mat-button [ngSwitch]="item.isFavorite" (click)="setFavorite(item.uri)">
@@ -83,12 +83,12 @@
             <mat-card-content>
               <div class="list-content">
                 <div class="img-wrapper" (click)="openModal(item)">
-                  <img src='{{item.pictures.sizes[2].link}}' alt="">
+                  <img src='{{item.img}}' alt="">
                 </div>
                 <div class="stats">
-                  <p><b>Adding date </b>{{item.release_time | date}}</p>
-                  <p><b>Likes </b>{{item.metadata.connections.likes.total}}</p>
-                  <p><b>Plays </b>{{item.stats.plays == null ? '0' : item.stats.plays}}</p>
+                  <p><b>Adding date </b>{{item.releaseTime}}</p>
+                  <p><b>Likes </b>{{item.likes}}</p>
+                  <p><b>Plays </b>{{item.plays}}</p>
                 </div>
               </div>
               <div class="actions">

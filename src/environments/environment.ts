@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://api.vimeo.com'
+  apiUrlVimeo: 'https://api.vimeo.com',
+  apiUrlYoutube: 'https://api.youtube.com'
 };
 
 /*

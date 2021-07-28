@@ -3,6 +3,7 @@ import {ServicesService} from "../../../_services/services.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {SnackbarComponent} from "../../../shared/components/snackbar/snackbar.component";
 import {Router} from "@angular/router";
+import {VideoModel} from "../../../models/videoModel";
 
 @Component({
   selector: 'app-videos-options',
@@ -21,7 +22,7 @@ export class VideosOptionsComponent implements OnInit {
   loadingUris = false
   lockButtons = false
 
-  videoList: any
+  videoList: VideoModel[]
   videoUrisList: string[] = [
     '/videos/568430412',
     '/videos/568018248',
@@ -54,7 +55,7 @@ export class VideosOptionsComponent implements OnInit {
     if (this.videoList) {
       localStorage.videoList = JSON.stringify(this.videoList)
       this.snackbar.openSnackBar('New videos have been added to list 👌')
-      this.videoList = null
+      this.videoList.length = 0
     }
   }
 
@@ -86,7 +87,15 @@ export class VideosOptionsComponent implements OnInit {
 
       this.services.getVideoById(this.searchVideoForm.get('videoId')?.value).subscribe(data => {
         if (data) {
-          this.videoInformation = data
+          this.videoInformation = {
+            name: data.name,
+            img: data.pictures.sizes[1].link,
+            isFavorite: false,
+            likes: data.metadata.connections.likes.total,
+            plays: data.stats.plays == null ? 0 : data.item.stats.plays,
+            releaseTime: data.release_time,
+            uri: data.uri
+          }
         }
         this.loading = false
         this.lockButtons = false
@@ -98,6 +107,7 @@ export class VideosOptionsComponent implements OnInit {
         this.lockButtons = false
       })
     }
+    console.log(this.videoList)
   }
 
   getVideosByUris() {
@@ -106,8 +116,20 @@ export class VideosOptionsComponent implements OnInit {
       this.lockButtons = true
 
       this.services.getVideoByUris(this.videoUrisList).subscribe( data => {
+        this.videoList = []
         if (data) {
-          this.videoList = Array.from(data.data)
+          data.data.forEach( (f: any) => {
+            this.videoList.push({
+              name: f.name,
+              img: f.pictures.sizes[2].link,
+              isFavorite: false,
+              likes: f.metadata.connections.likes.total,
+              plays: f.stats.plays == null ? 0 : data.item.stats.plays,
+              releaseTime: f.release_time,
+              uri: f.uri,
+              description: f.description
+            })
+          })
         }
         this.loadingUris = false
         this.lockButtons = false

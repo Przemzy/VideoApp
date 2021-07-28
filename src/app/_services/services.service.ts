@@ -12,7 +12,7 @@ export enum servicesUrl {
 })
 export class ServicesService {
 
-  apiUrl = environment.apiUrl
+  apiUrl = environment.apiUrlVimeo
 
   constructor(private http: HttpClient) {}
 

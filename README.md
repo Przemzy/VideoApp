@@ -3,10 +3,6 @@
 
 Application showing list of videos from Vimeo, you can watch those in modal window, set as favorite or just add some new videos to list (one by one or a few at once)
 
-To use this app you need to use your own Vimeo Api token to authenticate.
-
-To set your token go to src > app > _interceptors > jwt.interceptor and paste your token in "token" variable.
-
 VideoApp was generated with Angular CLI version 12.0.5.
 
 

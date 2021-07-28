@@ -8,7 +8,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 })
 export class DisplayVideoComponent implements OnInit {
 
-  @Input() videoId: any
+  @Input() videoId: string
 
   video: any
 
