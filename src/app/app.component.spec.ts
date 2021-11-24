@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import {ServicesService} from "./_services/services.service";
+import {YoutubeServicesService} from "./_services/youtube-services.service";
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -11,6 +13,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      providers: [ServicesService, YoutubeServicesService]
     }).compileComponents();
   });
 
@@ -24,12 +27,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('VideoApp');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('VideoApp app is running!');
   });
 });

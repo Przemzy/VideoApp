@@ -33,7 +33,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatButtonModule,
     MatIconModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

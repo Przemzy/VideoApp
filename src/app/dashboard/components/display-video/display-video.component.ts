@@ -15,7 +15,7 @@ export class DisplayVideoComponent implements OnInit {
   constructor( private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
-    this.videoId = this.videoId.replace('videos', 'video')
+    this.videoId = this.videoId?.replace('videos', 'video')
     this.video = this.sanitizer.bypassSecurityTrustResourceUrl('https://player.vimeo.com' + this.videoId)
   }
 }
