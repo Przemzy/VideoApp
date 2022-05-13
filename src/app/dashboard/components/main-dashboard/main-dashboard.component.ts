@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {ServicesService} from "../../../_services/services.service";
 import {DisplayOptionsEnum} from "../../../models/enums/displayOptionsEnum";
 import {MatDialog} from "@angular/material/dialog";
@@ -8,15 +8,17 @@ import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import {SnackbarComponent} from "../../../shared/components/snackbar/snackbar.component";
 import {VideoModel} from "../../../models/videoModel";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 
-
+@UntilDestroy()
 @Component({
   selector: 'app-main-dashboard',
   templateUrl: './main-dashboard.component.html',
   styleUrls: ['./main-dashboard.component.scss'],
-  providers: [SnackbarComponent]
+  providers: [SnackbarComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MainDashboardComponent implements OnInit, OnDestroy {
+export class MainDashboardComponent implements OnInit {
 
   removeVideoSubscription: Subscription
   setFavoriteVideoSubscription: Subscription
@@ -43,7 +45,9 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
               private dialog: MatDialog,
               private router: Router,
               private snackbar: SnackbarComponent,) {
-    this.removeVideoSubscription = this.helperService.getUpdatedList().subscribe(itemUri => {
+    this.removeVideoSubscription = this.helperService.getUpdatedList()
+      .pipe(untilDestroyed<MainDashboardComponent>(this))
+      .subscribe(itemUri => {
       if (itemUri) {
         const videoIndex = this.videoList.findIndex((f: { uri: any; }) => f.uri == itemUri)
         this.removeVideo(videoIndex)
@@ -51,7 +55,9 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
       }
     })
 
-    this.setFavoriteVideoSubscription = this.helperService.getUpdatedFavorite().subscribe(item => {
+    this.setFavoriteVideoSubscription = this.helperService.getUpdatedFavorite()
+      .pipe(untilDestroyed<MainDashboardComponent>(this))
+      .subscribe(item => {
       if (item) {
         this.setFavorite(item)
       }
@@ -164,8 +170,4 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     this.router.navigate(['dashboard/options'])
   }
 
-  ngOnDestroy() {
-    this.removeVideoSubscription.unsubscribe()
-    this.setFavoriteVideoSubscription.unsubscribe()
-  }
 }
